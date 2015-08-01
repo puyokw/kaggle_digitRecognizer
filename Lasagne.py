@@ -1,4 +1,3 @@
-# 
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
@@ -64,9 +63,9 @@ def make_submission(clf, X_test, encoder, name='my_neural_net_submission.csv'):
     print("Wrote submission to file {}.".format(name))
 
 np.random.seed(131)
-X, y, encoder = load_train_data('C:\\Users\\kawa\\Desktop\\kaggle\\digitRecognizer\\train.csv')
+X, y, encoder = load_train_data('train.csv')
 print X
-X_test = load_test_data('C:\\Users\\kawa\\Desktop\\kaggle\\digitRecognizer\\test.csv')
+X_test = load_test_data('test.csv')
 print X_test
 num_classes = len(encoder.classes_)
 num_features = X.shape[1]
@@ -114,5 +113,5 @@ net0 = NeuralNet(layers=layers0,
                      AdjustVariable('update_learning_rate', start=0.01, stop=0.001),])
 
 net0.fit(X, y)
-nombre="C:\\Users\\kawa\\Desktop\\kaggle\\digitRecognizer\\LasagneNN.csv"
+nombre="LasagneNN.csv"
 make_submission(net0, X_test, encoder,nombre)
