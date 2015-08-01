@@ -1,4 +1,3 @@
-# 
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
@@ -67,9 +66,9 @@ def make_submission(clf, X_test, encoder, name='my_neural_net_submission.csv'):
     print("Wrote submission to file {}.".format(name))
 
 np.random.seed(131)
-X, y, encoder = load_train_data('C:\\Users\\kawa\\Desktop\\kaggle\\digitRecognizer\\train.csv')
+X, y, encoder = load_train_data('train.csv')
 print X
-X_test = load_test_data('C:\\Users\\kawa\\Desktop\\kaggle\\digitRecognizer\\test.csv')
+X_test = load_test_data('test.csv')
 print X_test
 num_classes = len(encoder.classes_)
 num_features = X.shape[1]
@@ -82,7 +81,6 @@ X_test=np.sqrt(X_test+(3/8))
 X=X.reshape(-1,1,28, 28)
 X_test=X_test.reshape(-1,1,28,28)
 
-#for i in range(1,5):
 net = NeuralNet(
     layers=[
         ('input', InputLayer),
@@ -111,26 +109,14 @@ net = NeuralNet(
     output_nonlinearity=softmax,
     update=adagrad,
     update_learning_rate=theano.shared(float32(0.03)),
-    #update_momentum=theano.shared(float32(0.9)),
     eval_size=0.01,
-    #regression=True,
-    #batch_iterator_train=FlipBatchIterator(batch_size=128),
     on_epoch_finished=[
         AdjustVariable('update_learning_rate', start=0.01, stop=0.0001),
-        #AdjustVariable('update_momentum', start=0.9, stop=0.999),
-        #EarlyStopping(patience=200),
         ],
     max_epochs=30,
     verbose=1,
     )
-
-#clf3 = OneVsRestClassifier(SVC(C=5), n_jobs=-1)
-#print "ES:"+X
-#print y
 net.fit(X, y)
-nombre="C:\\Users\\kawa\\Desktop\\kaggle\\digitRecognizer\\LasagneCNNTest.csv"
+nombre="LasagneCNN.csv"
 make_submission(net, X_test, encoder,nombre)
-#nombre="C:\\Users\\kawa\\Desktop\\kaggle\\digitRecognizer\\LasagneNNTrain.csv"
-#make_submission(net, X, encoder,nombre)
-
 
