@@ -6,5 +6,6 @@
 <li> Lasagne NN 0.97286 </li>
 <li> randomForeset with t-SNE 0.97471 </li>
 <li> xgboost with t-SNE 0.97714 </li>
-<li> Lasagne cNN 0.98229 </li>
+<li> Lasagne CNN 0.98229 </li>
+<li> keras CNN 0.99414 </li>
 </ul>
